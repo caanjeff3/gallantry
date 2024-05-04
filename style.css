@@ -1,38 +1,80 @@
-body{
-    background-color: rgb(84, 104, 192);
-    color: #FFFFFF;
+/* Base Colors */
+:root {
+  --primary-color: #9c27b0; /* Primary purple */
+  --secondary-color: #f8bbd0; /* Light pink */
+  --white-color: #ffffff; /* White */
+  --light-gray: #f5f5f5; /* Light gray for backgrounds */
+  --dark-gray: #333333; /* Dark gray for text */
 }
 
+/* General Styles */
+body {
+  background-color: var(--light-gray);
+  color: var(--dark-gray);
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Main container */
+main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header and Sections */
+header, section {
+  margin-bottom: 20px;
+}
+
+/* Buttons */
 .button-39 {
-  background-color: #FFFFFF;
-  border: 1px solid rgb(209,213,219);
-  border-radius: .5rem;
-  box-sizing: border-box;
-  color: #111827;
-  font-family: "Inter var",ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-  font-size: .875rem;
-  font-weight: 600;
-  line-height: 1.25rem;
-  padding: .3rem 0.2rem;
-  text-align: center;
-  text-decoration: none #D1D5DB solid;
-  text-decoration-thickness: auto;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
   cursor: pointer;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: background-color 0.3s;
 }
 
 .button-39:hover {
-  background-color: rgb(249,250,251);
+  background-color: var(--secondary-color);
 }
 
-.button-39:focus {
-  outline: 2px solid transparent;
-  outline-offset: 2px;
+/* Select Dropdown */
+select.button-39 {
+  background-color: var(--white-color);
+  color: var(--dark-gray);
+  border: 1px solid var(--primary-color);
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: border-color 0.3s;
 }
 
-.button-39:focus-visible {
-  box-shadow: none;
+select.button-39:hover {
+  border-color: var(--secondary-color);
+}
+
+/* Status Paragraphs */
+#PlayerStat, #FightStatus, #ActivityStatus {
+  padding: 10px;
+  background-color: var(--white-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+/* Focused select and button styling */
+select.button-39:focus,
+button.button-39:focus {
+  outline: none;
+  border-color: var(--secondary-color);
 }

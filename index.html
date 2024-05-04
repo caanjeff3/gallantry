@@ -1,27 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Game</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+    <main>
+        <header>
+            <button class="button-39" id="FightEnemy">Fight</button>
+            <select class="button-39" name="enemies" id="enemies">
+                <option value="test">Test</option>
+                <option value="saab">Saab</option>
+                <option value="opel">Opel</option>
+                <option value="audi">Audi</option>
+            </select>
+        </header>
+        
+        <section class="actions">
+            <button class="button-39" id="DrinkPotion">Drink Potion</button>
+            <button class="button-39" id="BuyPotion">Buy Potion (15 Gold)</button>
+        </section>
+
+        <section class="status">
+            <p id="PlayerStat">100/100 HP || Gold: 0 || Level: 1 || XP: 0/100</p>
+            <p id="FightStatus">Fight logs will show up here :p</p>
+            <p id="ActivityStatus">Recent Actions :p</p>
+        </section>
+        <div id="TipLine">Tip: Try using potions to restore your health during battles!</div>
+    </main>
+
     <script src="index.js"></script>
-    <button class="button-39" id="FightEnemy">Fight</button>
-    <select class="button-39" name="cars" id="cars">
-        <option value="test">Test</option>
-        <option value="saab">Saab</option>
-        <option value="opel">Opel</option>
-        <option value="audi">Audi</option>
-      </select>
-      <button class="button-39" id="CheckGold">Check Gold</button>
-      <br>
-      <br>
-      <button class="button-39" id="DrinkPotion">Drink Potion</button>
-      <br>
-      <p id="PlayerStat">100/100</p>
-      <p id="FightStatus">Fight logs will show up here :p</p>
-      <p id="ActivityStatus">Recent Actions :p</p>
 </body>
+
 </html>
