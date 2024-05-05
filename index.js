@@ -1,25 +1,22 @@
 // Constants
 const COMBAT_INTERVAL_MS = 1000;
-const HEALTH_REGEN_INTERVAL_MS = 1000; // 0.5 seconds
+const HEALTH_REGEN_INTERVAL_MS = 1000; // 1 second
 
-// Initialize variables
-let winner = "NULL";
-let combatInterval = "NotApplied";
-let fightLogNumber = 0;
-let actionLogNumber = 0;
+// Player state variables
+let combatInterval = null;
 let potions = 1;
 
-// Array of tips
+// Game tips
 const tips = [
-    "Tip: Try using potions to restore your health during battles!",
-    "Tip: Level up your character to increase your max health and damage!",
-    "Tip: Check your gold regularly to make sure you have enough for potions!",
-    "Tip: Pay attention to the enemy's health and damage during combat!",
-    "Tip: Keep an eye on your experience points to level up!",
-    "Tip: The console can have some bonus info for you!",
+    "Tip: Use potions to restore health during battles!",
+    "Tip: Level up your character to increase max health and damage!",
+    "Tip: Keep an eye on your gold to buy potions!",
+    "Tip: Pay attention to enemy health and damage during combat!",
+    "Tip: Track your experience points to level up!",
+    "Tip: Check the console for bonus info!",
 ];
 
-// Player object
+// Player attributes
 const player = {
     maxHealth: 100,
     health: 100,
@@ -30,186 +27,205 @@ const player = {
     xpReq: 100,
 };
 
-// Enemy objects
+// Enemy data
 const enemies = {
-    test: {
-        name: "Geremy",
-        maxHealth: 25,
-        health: 25,
-        damage: 10,
-        baseGold: 5,
-        xpVal: 100,
-    },
+    rat: { name: "Rat", maxHealth: 25, health: 25, damage: 10, baseGold: 5, xpVal: 5 },
+    wildBoar: { name: "Wild Boar", maxHealth: 30, health: 30, damage: 12, baseGold: 7, xpVal: 7 },
+    ent: { name: "Ent", maxHealth: 60, health: 60, damage: 18, baseGold: 15, xpVal: 15 },
+    direWolf: { name: "Dire Wolf", maxHealth: 75, health: 75, damage: 20, baseGold: 20, xpVal: 20 },
+    ancientGuardian: { name: "Ancient Guardian", maxHealth: 500, health: 500, damage: 30, baseGold: 300, xpVal: 300 },
 };
 
-// Event listener for loading the game
-window.addEventListener("load", function () {
-    document.getElementById("FightEnemy").onclick = startCombat;
-    document.getElementById("DrinkPotion").onclick = healPlayerWithPotion;
-    document.getElementById("BuyPotion").onclick = buyPotion;
+// Event listeners
+window.addEventListener("load", initializeGame);
+window.addEventListener("beforeunload", () => savePlayerStatsToCookies(player));
 
-    // Set interval for changing the tip line every 5 seconds
-    setInterval(updateTipLine, 20000);
+function initializeGame() {
+    // Set up button event listeners
+    document.getElementById("FightEnemy").addEventListener("click", startCombat);
+    document.getElementById("DrinkPotion").addEventListener("click", healPlayerWithPotion);
+    document.getElementById("BuyPotion").addEventListener("click", buyPotion);
+    document.getElementById("reset-player-stats").addEventListener("click", resetPlayerStats);
+    document.getElementById("reset-health").addEventListener("click", resetPlayerHealth);
+    document.getElementById("add-gold").addEventListener("click", addGold);
+    document.getElementById("level-up").addEventListener("click", levelUpPlayer);
+    
+    // Set up intervals
+    setInterval(updateTipLine, 20000); // Update tip line every 20 seconds
+    setInterval(regeneratePlayerHealth, HEALTH_REGEN_INTERVAL_MS); // Regenerate health every 1 second
+    
+    // Load player stats from cookies
+    loadPlayerStatsFromCookies();
+}
 
-    // Set interval for regenerating player health every 1 second
-    setInterval(regeneratePlayerHealth, HEALTH_REGEN_INTERVAL_MS);
-});
+// Player stats load/save
+function loadPlayerStatsFromCookies() {
+    const cookies = document.cookie.split('; ');
+    const playerStatsCookie = cookies.find(cookie => cookie.startsWith('playerStats='));
 
-// Function to start combat with the selected enemy
+    if (playerStatsCookie) {
+        const playerStats = playerStatsCookie.split('=')[1];
+        const [health, gold, level, xp, xpReq] = playerStats.split('|').map(Number);
+        
+        // Update player object
+        player.health = health;
+        player.gold = gold;
+        player.level = level;
+        player.xp = xp;
+        player.xpReq = xpReq;
+
+        updatePlayerStatus();
+    }
+}
+
+function savePlayerStatsToCookies(player) {
+    const expirationDate = new Date();
+    expirationDate.setTime(expirationDate.getTime() + (30 * 24 * 60 * 60 * 1000)); // 30 days
+
+    const playerStats = `${player.health}|${player.gold}|${player.level}|${player.xp}|${player.xpReq}`;
+    document.cookie = `playerStats=${playerStats}; expires=${expirationDate.toUTCString()}; path=/`;
+}
+
+// Combat logic
 function startCombat() {
     const selectedEnemy = document.getElementById("enemies").value;
-    if (combatInterval === "NotApplied") {
-        combatInterval = setInterval(() => calculateDamage(selectedEnemy), COMBAT_INTERVAL_MS);
+    if (!combatInterval) {
+        combatInterval = setInterval(() => combatRound(selectedEnemy), COMBAT_INTERVAL_MS);
     } else {
         console.log("Currently in a fight!");
     }
 }
 
-// Function to calculate damage dealt and received during combat
-function calculateDamage(enemyKey) {
+function combatRound(enemyKey) {
     const enemy = enemies[enemyKey];
+
     player.health -= enemy.damage;
     enemy.health -= player.damage;
 
     updateFightStatus(player.damage, enemy.name, enemy.damage);
     updatePlayerStatus();
-    fightLogNumber += 1;
 
     if (isCombatOver(player, enemy)) {
         endCombat(enemyKey);
     }
 }
 
-// Function to determine if the combat is over
 function isCombatOver(player, enemy) {
     return player.health <= 0 || enemy.health <= 0;
 }
 
-// Function to end combat and handle outcomes
 function endCombat(enemyKey) {
     clearInterval(combatInterval);
-    combatInterval = "NotApplied";
+    combatInterval = null;
 
     const enemy = enemies[enemyKey];
-    winner = player.health > 0 ? "player" : enemyKey;
+    const isPlayerWinner = player.health > 0;
 
-    if (winner === "player") {
+    if (isPlayerWinner) {
         handlePlayerVictory(enemy);
     } else {
-        console.log(`The winner is ${enemy.name}`);
+        handlePlayerDefeat();
     }
 
     updatePlayerStatus();
 }
 
-// Function to handle player victory during combat
 function handlePlayerVictory(enemy) {
-    document.getElementById("FightStatus").innerText = `You beat ${enemy.name}! | Log ${fightLogNumber}`;
+    document.getElementById("FightStatus").innerText = `You defeated the ${enemy.name}!`;
     player.gold += calculateRandomGold(enemy.baseGold);
     givePlayerXp(enemy.xpVal);
     resetEnemyHealth(enemy);
 }
 
-// Function to calculate random gold earned after a fight
-function calculateRandomGold(baseGold, minMultiplier = 0.5, maxMultiplier = 2) {
-    const randomMultiplier = Math.random() * (maxMultiplier - minMultiplier) + minMultiplier;
-    return Math.round(baseGold * randomMultiplier);
+function handlePlayerDefeat() {
+    const goldLoss = Math.round(player.gold * 0.1);
+    player.gold -= goldLoss;
+    player.health = 0;
+
+    document.getElementById("FightStatus").innerText = `You were defeated! Lost ${goldLoss} gold.`;
 }
 
-// Function to reset enemy health to max
-function resetEnemyHealth(enemy) {
-    enemy.health = enemy.maxHealth;
-}
-
-// Function to heal player with a potion
+// Player actions
 function healPlayerWithPotion() {
     if (potions > 0) {
         const healingAmount = player.maxHealth / 4;
-        potions -= 1;
+        potions--;
         player.health += healingAmount;
 
         displayHealingStatus(healingAmount);
-        actionLogNumber += 1;
 
         if (player.health > player.maxHealth) {
             player.health = player.maxHealth;
         }
+
         updatePlayerStatus();
     }
 }
 
-// Function to display healing status
-function displayHealingStatus(healingAmount) {
-    document.getElementById("ActivityStatus").innerText = `You healed for ${healingAmount} health | Log ${actionLogNumber}`;
-}
-
-// Function to buy a potion for the player
 function buyPotion() {
     const potionCost = 15;
 
     if (player.gold >= potionCost) {
         player.gold -= potionCost;
-        potions += 1;
-
+        potions++;
         updatePlayerStatus();
-        document.getElementById("ActivityStatus").innerText = `You bought a potion for ${potionCost} gold. Total potions: ${potions} | Log ${actionLogNumber}`;
-        actionLogNumber += 1;
+
+        document.getElementById("ActivityStatus").innerText = `Bought a potion for ${potionCost} gold. Total potions: ${potions}`;
     } else {
-        document.getElementById("ActivityStatus").innerText = `Not enough gold to buy a potion! You need ${potionCost} gold. | Log ${actionLogNumber}`;
-        actionLogNumber += 1;
+        document.getElementById("ActivityStatus").innerText = `Not enough gold to buy a potion!`;
     }
 }
 
-// Function to update the fight status in the DOM
+// Player status updates
 function updateFightStatus(playerDamage, enemyName, enemyDamage) {
-    document.getElementById("FightStatus").innerText = `You dealt ${playerDamage} damage to ${enemyName} but received ${enemyDamage} damage | Log ${fightLogNumber}`;
+    document.getElementById("FightStatus").innerText = `Dealt ${playerDamage} damage to the ${enemyName} and received ${enemyDamage} damage.`;
 }
 
-// Function to update player's health, gold, and experience in the DOM
 function updatePlayerStatus() {
     document.getElementById("PlayerStat").innerText = `${player.health}/${player.maxHealth} HP || Gold: ${player.gold} || Level: ${player.level} || XP: ${player.xp}/${player.xpReq}`;
 }
 
-// Function to give player experience and level up if necessary
+function displayHealingStatus(healingAmount) {
+    document.getElementById("ActivityStatus").innerText = `Healed for ${healingAmount} health.`;
+}
+
+// Leveling up and XP
 function givePlayerXp(xpVal) {
     player.xp += xpVal;
 
-    if (player.xp >= player.xpReq) {
-        player.xp = 0;
-        player.xpReq = Math.round(player.xpReq * 1.05);
+    while (player.xp >= player.xpReq) {
+        player.xp -= player.xpReq;
         player.level++;
-
+        player.xpReq = Math.round(player.xpReq * 1.05);
         levelUpPlayer();
     }
 }
 
-// Function to handle player leveling up
 function levelUpPlayer() {
-    const healthIncrease = Math.round(player.maxHealth * 0.1); // Increase max health by 10%
-    const damageIncrease = Math.round(player.damage * 0.2); // Increase damage by 20%
+    player.maxHealth += Math.round(player.maxHealth * 0.1);
+    player.damage += Math.round(player.damage * 0.2);
 
-    player.maxHealth += healthIncrease;
-    player.damage += damageIncrease;
-
-    // Adjust player's current health to the new max health if necessary
     if (player.health > player.maxHealth) {
         player.health = player.maxHealth;
     }
 
     updatePlayerStatus();
-    displayLevelUpMessage();
+    document.getElementById("ActivityStatus").innerText = `Leveled up to level ${player.level}!`;
 }
 
-// Function to display the level-up message
-function displayLevelUpMessage() {
-    document.getElementById("ActivityStatus").innerText = `You leveled up to level ${player.level} and gained 10% more stats!`;
+// Utility functions
+function calculateRandomGold(baseGold, minMultiplier = 0.5, maxMultiplier = 2) {
+    const randomMultiplier = Math.random() * (maxMultiplier - minMultiplier) + minMultiplier;
+    return Math.round(baseGold * randomMultiplier);
 }
 
-// Function to regenerate player's health
+function resetEnemyHealth(enemy) {
+    enemy.health = enemy.maxHealth;
+}
+
 function regeneratePlayerHealth() {
-    const healthRegenAmount = player.maxHealth * 0.01;
-
-    player.health += Math.round(healthRegenAmount);
+    const healthRegenAmount = Math.round(player.maxHealth * 0.01);
+    player.health += healthRegenAmount;
 
     if (player.health > player.maxHealth) {
         player.health = player.maxHealth;
@@ -218,8 +234,34 @@ function regeneratePlayerHealth() {
     updatePlayerStatus();
 }
 
-// Function to update the tip line with a random tip
+// Update tip line every 20 seconds
 function updateTipLine() {
     const randomTip = tips[Math.floor(Math.random() * tips.length)];
     document.getElementById("TipLine").innerText = randomTip;
+}
+
+// Debug functions
+function resetPlayerStats() {
+    player.maxHealth = 100;
+    player.health = 100;
+    player.damage = 10;
+    player.gold = 0;
+    player.level = 1;
+    player.xp = 0;
+    player.xpReq = 100;
+
+    updatePlayerStatus();
+    console.log("Player stats have been reset.");
+}
+
+function resetPlayerHealth() {
+    player.health = player.maxHealth;
+    updatePlayerStatus();
+    console.log("Player health reset to max health.");
+}
+
+function addGold() {
+    player.gold += 100; // Add 100 gold as an example
+    updatePlayerStatus();
+    console.log("Added 100 gold to player.");
 }

@@ -2,25 +2,32 @@
 <html lang="en">
 
 <head>
+    <link rel="icon" href="icon.ico" type="image/x-icon">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game</title>
+    <title>Throne of Vengeance</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <main>
-        <header>
-            <button class="button-39" id="FightEnemy">Fight</button>
+        <!-- Existing content (enemies select, buttons, status, etc.) -->
+        <section class="enemies-selection">
+            <label for="enemies">Forest</label>
             <select class="button-39" name="enemies" id="enemies">
-                <option value="test">Test</option>
-                <option value="saab">Saab</option>
-                <option value="opel">Opel</option>
-                <option value="audi">Audi</option>
+                <option value="rat">Rat</option>
+                <option value="wildBoar">Wild Boar</option>
+                <option value="Ent">Ent</option>
+                <option value="direWolf">Dire Wolf</option>
+                <option value="ancientGuardian">Ancient Guardian</option>
             </select>
+        </section>
+
+        <header>
+            <button class="button-39" id="FightEnemy">Fight Selected Enemy</button>
         </header>
-        
+
         <section class="actions">
             <button class="button-39" id="DrinkPotion">Drink Potion</button>
             <button class="button-39" id="BuyPotion">Buy Potion (15 Gold)</button>
@@ -33,6 +40,15 @@
         </section>
         <div id="TipLine">Tip: Try using potions to restore your health during battles!</div>
     </main>
+
+    <!-- Development side panel -->
+    <div id="dev-panel">
+        <h3>Debug Panel</h3>
+        <button id="reset-health">Reset Health</button>
+        <button id="add-gold">Add Gold</button>
+        <button id="level-up">Level Up</button>
+        <button id="reset-player-stats">Reset Player Stats</button>
+    </div>
 
     <script src="index.js"></script>
 </body>
