@@ -8,13 +8,14 @@
 }
 
 /* General Styles */
+/* General Styles */
 body {
   background-color: var(--light-background);
   color: var(--dark-gray);
-  font-family: 'Garamond', serif; /* Choose a more traditional or rustic font */
+  font-family: 'EB Garamond', serif; /* Set the font to EB Garamond */
   margin: 0;
   padding: 0;
-  background-image: url('path_to_texture_image.jpg'); /* Set the path to the background image */
+  background-image: url('path_to_texture_image.jpg');
   background-size: cover;
 }
 
@@ -34,6 +35,7 @@ header, section {
   border: 1px solid var(--primary-color);
   border-radius: 10px; /* Softer, rounder corners */
   padding: 10px;
+  font-family: 'EB Garamond', serif;
 }
 
 /* Buttons */
@@ -47,6 +49,7 @@ header, section {
   font-weight: bold;
   text-transform: uppercase;
   transition: background-color 0.3s, border-color 0.3s;
+  font-family: 'EB Garamond', serif;
 }
 
 .button-39:hover {
@@ -65,6 +68,7 @@ select.button-39 {
   font-weight: bold;
   text-transform: uppercase;
   transition: border-color 0.3s, background-color 0.3s;
+  font-family: 'EB Garamond', serif;
 }
 
 select.button-39:hover {
@@ -80,6 +84,7 @@ select.button-39:hover {
   border-radius: 10px;
   margin-bottom: 10px;
   font-weight: bold;
+  font-family: 'EB Garamond', serif;
 }
 
 /* Focused select and button styling */
@@ -87,6 +92,7 @@ select.button-39:focus,
 button.button-39:focus {
   outline: none;
   border-color: var(--secondary-color);
+  font-family: 'EB Garamond', serif;
 }
 
 /* Styling for the enemies selection section */
@@ -96,11 +102,13 @@ button.button-39:focus {
   border-radius: 10px;
   padding: 10px;
   margin-bottom: 20px;
+  font-family: 'EB Garamond', serif;
 }
 
 /* Style for the development side panel */
 #dev-panel {
   position: fixed;
+  font-family: 'EB Garamond', serif;
   top: 0;
   right: 0;
   width: 250px;
@@ -115,6 +123,7 @@ button.button-39:focus {
 /* Styling buttons within the dev panel */
 #dev-panel button {
   width: 100%;
+  font-family: 'EB Garamond', serif;
   margin: 5px 0;
   padding: 10px;
   border: none;
@@ -127,5 +136,66 @@ button.button-39:focus {
 }
 
 #dev-panel button:hover {
+  font-family: 'EB Garamond', serif;
   background-color: var(--secondary-color);
+}
+
+/* Shop section */
+.shop {
+  font-family: 'EB Garamond', serif;
+  margin-top: 15px; /* Adjust margin above the shop section */
+  padding: 10px; /* Maintain consistency with other sections */
+  background-color: var(--white-color);
+  color: var(--dark-gray);
+}
+
+/* Shop heading */
+.shop h3 {
+  font-family: 'EB Garamond', serif;
+  margin-bottom: 10px; /* Standardize margin with other headers */
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  font-weight: bold; /* Maintain consistency with other headers */
+}
+
+/* Shop item list */
+.shop #shop-items {
+  list-style: none;
+  margin-bottom: 20px;
+  background-color: var(--white-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 10px; /* Softer, rounder corners */
+  padding: 10px;
+  font-family: 'EB Garamond', serif;
+  font-weight: bold; /* Maintain consistency with other headers */
+
+}
+
+/* Shop item */
+.shop #shop-items li {
+  margin-bottom: 5px; /* Standardize spacing between items */
+  padding: 10px; /* Maintain padding consistent with other sections */
+  border: 2px solid var(--primary-color);
+  border-radius: 10px;
+  background-color: var(--white-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Buy button */
+.shop #shop-items .buy-button {
+  padding: 5px 10px; /* Maintain padding consistent with other buttons */
+  border: 2px solid var(--secondary-color);
+  border-radius: 10px;
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-weight: bold;
+}
+
+.shop #shop-items .buy-button:hover {
+  background-color: var(--secondary-color);
+  border-color: var(--primary-color);
 }

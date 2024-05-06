@@ -16,6 +16,20 @@ const tips = [
     "Tip: Check the console for bonus info!",
 ];
 
+const shopItems = [
+    {
+        name: "Potion",
+        cost: 15,
+        effect: function(player) {
+            player.health += player.maxHealth * 0.25;
+            if (player.health > player.maxHealth) {
+                player.health = player.maxHealth;
+            }
+        }
+    },
+    // Add more items as needed
+];
+
 // Player attributes
 const player = {
     maxHealth: 100,
@@ -43,8 +57,6 @@ window.addEventListener("beforeunload", () => savePlayerStatsToCookies(player));
 function initializeGame() {
     // Set up button event listeners
     document.getElementById("FightEnemy").addEventListener("click", startCombat);
-    document.getElementById("DrinkPotion").addEventListener("click", healPlayerWithPotion);
-    document.getElementById("BuyPotion").addEventListener("click", buyPotion);
     document.getElementById("reset-player-stats").addEventListener("click", resetPlayerStats);
     document.getElementById("reset-health").addEventListener("click", resetPlayerHealth);
     document.getElementById("add-gold").addEventListener("click", addGold);
@@ -56,6 +68,8 @@ function initializeGame() {
     
     // Load player stats from cookies
     loadPlayerStatsFromCookies();
+    const devPanel = document.getElementById("dev-panel");
+    devPanel.style.display = "none"; // Hide the dev panel by default
 }
 
 // Player stats load/save
@@ -75,6 +89,37 @@ function loadPlayerStatsFromCookies() {
         player.xpReq = xpReq;
 
         updatePlayerStatus();
+    }
+}
+
+document.getElementById("shop-items").addEventListener("click", function (event) {
+    if (event.target.classList.contains("buy-button")) {
+        const listItem = event.target.parentElement;
+        const itemName = listItem.getAttribute("data-item");
+        const itemCost = parseInt(listItem.getAttribute("data-cost"), 10);
+        
+        purchaseItem(itemName, itemCost);
+    }
+});
+
+// Function to handle item purchases
+function purchaseItem(itemName, itemCost) {
+    // Find the item in the shopItems array
+    const item = shopItems.find(item => item.name.toLowerCase() === itemName.toLowerCase());
+    
+    if (item && player.gold >= itemCost) {
+        // Deduct gold and apply item effect
+        player.gold -= itemCost;
+        item.effect(player);
+
+        // Update player stats and other game elements
+        updatePlayerStatus();
+
+        // Display a purchase success message
+        document.getElementById("ActivityStatus").innerText = `Purchased ${item.name} for ${itemCost} gold!`;
+    } else {
+        // Display a failure message if not enough gold
+        document.getElementById("ActivityStatus").innerText = "Not enough gold to purchase this item.";
     }
 }
 
@@ -145,37 +190,6 @@ function handlePlayerDefeat() {
     document.getElementById("FightStatus").innerText = `You were defeated! Lost ${goldLoss} gold.`;
 }
 
-// Player actions
-function healPlayerWithPotion() {
-    if (potions > 0) {
-        const healingAmount = player.maxHealth / 4;
-        potions--;
-        player.health += healingAmount;
-
-        displayHealingStatus(healingAmount);
-
-        if (player.health > player.maxHealth) {
-            player.health = player.maxHealth;
-        }
-
-        updatePlayerStatus();
-    }
-}
-
-function buyPotion() {
-    const potionCost = 15;
-
-    if (player.gold >= potionCost) {
-        player.gold -= potionCost;
-        potions++;
-        updatePlayerStatus();
-
-        document.getElementById("ActivityStatus").innerText = `Bought a potion for ${potionCost} gold. Total potions: ${potions}`;
-    } else {
-        document.getElementById("ActivityStatus").innerText = `Not enough gold to buy a potion!`;
-    }
-}
-
 // Player status updates
 function updateFightStatus(playerDamage, enemyName, enemyDamage) {
     document.getElementById("FightStatus").innerText = `Dealt ${playerDamage} damage to the ${enemyName} and received ${enemyDamage} damage.`;
@@ -195,7 +209,6 @@ function givePlayerXp(xpVal) {
 
     while (player.xp >= player.xpReq) {
         player.xp -= player.xpReq;
-        player.level++;
         player.xpReq = Math.round(player.xpReq * 1.05);
         levelUpPlayer();
     }
@@ -209,6 +222,7 @@ function levelUpPlayer() {
         player.health = player.maxHealth;
     }
 
+    player.level++;
     updatePlayerStatus();
     document.getElementById("ActivityStatus").innerText = `Leveled up to level ${player.level}!`;
 }
@@ -232,6 +246,27 @@ function regeneratePlayerHealth() {
     }
 
     updatePlayerStatus();
+}
+
+function showDevConsole() {
+    const devPanel = document.getElementById("dev-panel");
+    
+    // Toggle the visibility of the development panel
+    if (devPanel.style.display === "none") {
+        devPanel.style.display = "block";
+        console.log("Development panel is now visible.");
+    } else {
+        devPanel.style.display = "none";
+        console.log("Development panel is now hidden.");
+    }
+}
+
+function hideDevConsole() {
+    const devPanel = document.getElementById("dev-panel");
+    
+    // Hide the development panel
+    devPanel.style.display = "none";
+    console.log("Development panel is now hidden.");
 }
 
 // Update tip line every 20 seconds
@@ -261,7 +296,7 @@ function resetPlayerHealth() {
 }
 
 function addGold() {
-    player.gold += 100; // Add 100 gold as an example
+    player.gold += 100;
     updatePlayerStatus();
     console.log("Added 100 gold to player.");
 }

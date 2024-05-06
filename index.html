@@ -8,29 +8,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Throne of Vengeance</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&display=swap">
 </head>
+
 
 <body>
     <main>
-        <!-- Existing content (enemies select, buttons, status, etc.) -->
         <section class="enemies-selection">
-            <label for="enemies">Forest</label>
             <select class="button-39" name="enemies" id="enemies">
-                <option value="rat">Rat</option>
-                <option value="wildBoar">Wild Boar</option>
-                <option value="Ent">Ent</option>
-                <option value="direWolf">Dire Wolf</option>
-                <option value="ancientGuardian">Ancient Guardian</option>
+                <optgroup label="Forest (0-10)">
+                    <option value="rat" title="Health: 25, Damage: 10, Gold: 5, XP: 5">Rat</option>
+                    <option value="wildBoar" title="Health: 30, Damage: 12, Gold: 7, XP: 7">Wild Boar</option>
+                    <option value="Ent" title="Health: 60, Damage: 18, Gold: 15, XP: 15">Ent</option>
+                    <option value="direWolf" title="Health: 75, Damage: 20, Gold: 20, XP: 20">Dire Wolf</option>
+                    <option value="ancientGuardian" title="Health: 500, Damage: 30, Gold: 300, XP: 300">(Boss) Ancient Guardian</option>
+                </optgroup>
             </select>
+            <button class="button-39" id="FightEnemy">Fight Selected Enemy</button>
+
         </section>
 
-        <header>
-            <button class="button-39" id="FightEnemy">Fight Selected Enemy</button>
-        </header>
-
-        <section class="actions">
-            <button class="button-39" id="DrinkPotion">Drink Potion</button>
-            <button class="button-39" id="BuyPotion">Buy Potion (15 Gold)</button>
+        <section class="shop">
+            <h3>Shop</h3>
+            <ul id="shop-items">
+                <li data-item="potion" data-cost="15">
+                    Potion - Cost: 15 Gold
+                    <button class="buy-button">Buy</button>
+                </li>
+                <!-- Add more shop items here -->
+            </ul>
         </section>
 
         <section class="status">
@@ -41,14 +47,15 @@
         <div id="TipLine">Tip: Try using potions to restore your health during battles!</div>
     </main>
 
-    <!-- Development side panel -->
-    <div id="dev-panel">
+    <!-- funky lil cheat buttons :3 -->
+    <div id="dev-panel" style="display: none;">
         <h3>Debug Panel</h3>
         <button id="reset-health">Reset Health</button>
         <button id="add-gold">Add Gold</button>
         <button id="level-up">Level Up</button>
         <button id="reset-player-stats">Reset Player Stats</button>
     </div>
+
 
     <script src="index.js"></script>
 </body>
