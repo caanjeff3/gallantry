@@ -25,7 +25,7 @@ main {
   margin: 0 auto;
   padding: 20px;
   border: 1px solid var(--dark-gray);
-  border-radius: 10px; /* Softer, rounder corners */
+  border-radius: 10px;
 }
 
 /* Header and Sections */
@@ -33,7 +33,7 @@ header, section {
   margin-bottom: 20px;
   background-color: var(--white-color);
   border: 1px solid var(--primary-color);
-  border-radius: 10px; /* Softer, rounder corners */
+  border-radius: 10px;
   padding: 10px;
   font-family: 'EB Garamond', serif;
 }
