@@ -374,5 +374,4 @@
   function addGold() {
     player.gold += 100;
     updatePlayerStatus();
-    console.log("Added 100 gold to player.");
   }
