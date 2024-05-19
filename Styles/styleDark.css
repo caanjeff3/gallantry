@@ -1,21 +1,20 @@
 /* Base Colors */
 :root {
-  --primary-color: #6f4e37; /* Rich brown */
-  --secondary-color: #c19a6b; /* Light brown or tan */
+  --primary-color: #1a1a6e; /* Deep blue */
+  --secondary-color: #008080; /* Teal */
   --white-color: #fff8dc; /* Corn silk */
   --light-background: #e6d3b1; /* Warm, earthy beige */
   --dark-gray: #2c2c2c; /* Dark charcoal */
 }
 
 /* General Styles */
-/* General Styles */
 body {
-  background-color: var(--light-background);
-  color: var(--dark-gray);
-  font-family: 'EB Garamond', serif; /* Set the font to EB Garamond */
+  background-color: #000;
+  color: #fff;
+  font-family: 'EB Garamond', serif;
   margin: 0;
   padding: 0;
-  background-image: url('path_to_texture_image.jpg');
+  background-image: url('background.png');
   background-size: cover;
 }
 
@@ -26,65 +25,59 @@ main {
   padding: 20px;
   border: 1px solid var(--dark-gray);
   border-radius: 10px;
+  background-color: var(--light-background);
 }
 
 /* Header and Sections */
-header, section {
+header,
+section {
   margin-bottom: 20px;
   background-color: var(--white-color);
   border: 1px solid var(--primary-color);
   border-radius: 10px;
   padding: 10px;
-  font-family: 'EB Garamond', serif;
 }
 
 /* Buttons */
-.button-39 {
-  background-color: var(--primary-color);
-  color: var(--white-color);
-  border: 2px solid var(--secondary-color);
+.button-39,
+button.buy-button {
+  background-color: #333;
+  color: #fff;
+  border: none;
   padding: 10px 20px;
-  border-radius: 10px;
+  margin: 5px;
   cursor: pointer;
-  font-weight: bold;
-  text-transform: uppercase;
-  transition: background-color 0.3s, border-color 0.3s;
-  font-family: 'EB Garamond', serif;
 }
 
-.button-39:hover {
-  background-color: var(--secondary-color);
-  border-color: var(--primary-color);
+.button-39:hover,
+button.buy-button:hover {
+  background-color: #555;
 }
 
 /* Select Dropdown */
 select.button-39 {
-  background-color: var(--white-color);
-  color: var(--dark-gray);
-  border: 2px solid var(--primary-color);
+  background-color: #333;
+  color: #fff;
+  border: none;
   padding: 10px;
-  border-radius: 10px;
+  margin: 5px;
   cursor: pointer;
-  font-weight: bold;
-  text-transform: uppercase;
-  transition: border-color 0.3s, background-color 0.3s;
-  font-family: 'EB Garamond', serif;
 }
 
 select.button-39:hover {
-  border-color: var(--secondary-color);
-  background-color: var(--light-background);
+  background-color: #555;
 }
 
 /* Status Paragraphs */
-#PlayerStat, #FightStatus, #ActivityStatus {
+#PlayerStat,
+#FightStatus,
+#ActivityStatus {
   padding: 10px;
   background-color: var(--white-color);
   border: 2px solid var(--primary-color);
   border-radius: 10px;
   margin-bottom: 10px;
   font-weight: bold;
-  font-family: 'EB Garamond', serif;
 }
 
 /* Focused select and button styling */
@@ -92,7 +85,6 @@ select.button-39:focus,
 button.button-39:focus {
   outline: none;
   border-color: var(--secondary-color);
-  font-family: 'EB Garamond', serif;
 }
 
 /* Styling for the enemies selection section */
@@ -102,13 +94,31 @@ button.button-39:focus {
   border-radius: 10px;
   padding: 10px;
   margin-bottom: 20px;
-  font-family: 'EB Garamond', serif;
+}
+
+/* Position the button in the top right corner */
+#cycleThemes {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  border: 2px solid var(--secondary-color);
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  z-index: 1000;
+}
+
+#cycleThemes:hover {
+  background-color: var(--secondary-color);
 }
 
 /* Style for the development side panel */
 #dev-panel {
   position: fixed;
-  font-family: 'EB Garamond', serif;
   top: 0;
   right: 0;
   width: 250px;
@@ -117,13 +127,12 @@ button.button-39:focus {
   padding: 10px;
   border-left: 2px solid var(--primary-color);
   box-shadow: -3px 0 5px rgba(0, 0, 0, 0.2);
-  border-radius: 10px 0 0 10px; /* Rounded corners */
+  border-radius: 10px 0 0 10px;
 }
 
 /* Styling buttons within the dev panel */
 #dev-panel button {
   width: 100%;
-  font-family: 'EB Garamond', serif;
   margin: 5px 0;
   padding: 10px;
   border: none;
@@ -132,30 +141,26 @@ button.button-39:focus {
   color: var(--white-color);
   font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s;
 }
 
 #dev-panel button:hover {
-  font-family: 'EB Garamond', serif;
   background-color: var(--secondary-color);
 }
 
 /* Shop section */
 .shop {
-  font-family: 'EB Garamond', serif;
-  margin-top: 15px; /* Adjust margin above the shop section */
-  padding: 10px; /* Maintain consistency with other sections */
+  margin-top: 15px;
+  padding: 10px;
   background-color: var(--white-color);
   color: var(--dark-gray);
 }
 
 /* Shop heading */
 .shop h3 {
-  font-family: 'EB Garamond', serif;
-  margin-bottom: 10px; /* Standardize margin with other headers */
+  margin-bottom: 10px;
   font-size: 1.2rem;
   color: var(--primary-color);
-  font-weight: bold; /* Maintain consistency with other headers */
+  font-weight: bold;
 }
 
 /* Shop item list */
@@ -164,17 +169,14 @@ button.button-39:focus {
   margin-bottom: 20px;
   background-color: var(--white-color);
   border: 1px solid var(--primary-color);
-  border-radius: 10px; /* Softer, rounder corners */
+  border-radius: 10px;
   padding: 10px;
-  font-family: 'EB Garamond', serif;
-  font-weight: bold; /* Maintain consistency with other headers */
-
 }
 
 /* Shop item */
 .shop #shop-items li {
-  margin-bottom: 5px; /* Standardize spacing between items */
-  padding: 10px; /* Maintain padding consistent with other sections */
+  margin-bottom: 5px;
+  padding: 10px;
   border: 2px solid var(--primary-color);
   border-radius: 10px;
   background-color: var(--white-color);
@@ -185,17 +187,14 @@ button.button-39:focus {
 
 /* Buy button */
 .shop #shop-items .buy-button {
-  padding: 5px 10px; /* Maintain padding consistent with other buttons */
+  padding: 5px 10px;
   border: 2px solid var(--secondary-color);
   border-radius: 10px;
   background-color: var(--primary-color);
   color: var(--white-color);
   cursor: pointer;
-  transition: background-color 0.3s;
-  font-weight: bold;
 }
 
 .shop #shop-items .buy-button:hover {
   background-color: var(--secondary-color);
-  border-color: var(--primary-color);
 }

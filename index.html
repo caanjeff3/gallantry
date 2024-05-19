@@ -7,12 +7,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Throne of Vengeance</title>
-    <link rel="stylesheet" href="style.css">
+    <link id="stylesheet" rel="stylesheet" href="Styles/styleCream.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 
 <body>
+
+    <button onclick="changeStylesheet()" id="cycleThemes">Change Theme</button>
     <main>
         <section class="enemies-selection">
             <select class="button-39" name="enemies" id="enemies">
@@ -22,6 +25,11 @@
                     <option value="Ent" title="Health: 60, Damage: 18, Gold: 15, XP: 15">Ent</option>
                     <option value="direWolf" title="Health: 75, Damage: 20, Gold: 20, XP: 20">Dire Wolf</option>
                     <option value="ancientGuardian" title="Health: 500, Damage: 30, Gold: 300, XP: 300">(Boss) Ancient Guardian</option>
+                </optgroup>
+                <optgroup label="Mountain Pass (10-25)">
+                    <option value="mountainBandit">Mountain Bandit</option>
+                    <option value="frostSpider">Frost Spider</option>
+                    <option value="iceTroll">Ice Troll</option>
                 </optgroup>
             </select>
             <button class="button-39" id="FightEnemy">Fight Selected Enemy</button>
