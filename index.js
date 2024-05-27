@@ -6,7 +6,6 @@ const HEALTH_REGEN_INTERVAL_MS = 1000; // 1 second
 let combatInterval = null;
 let potions = 1;
 
-// Game tips
 const tips = [
   "Tip: Use potions to restore health during battles!",
   "Tip: Level up your character to increase max health and damage!",
@@ -39,7 +38,7 @@ const shopItems = [
       }
     },
   },
-  // Add more items as needed
+  //TODO: mroe things :3
 ];
 
 // Player attributes
@@ -126,7 +125,7 @@ const enemies = {
   },
 };
 
-// Event listeners
+// me when i listen for events
 window.addEventListener("load", initializeGame);
 window.addEventListener("beforeunload", () => savePlayerStatsToCookies(player));
 
@@ -194,7 +193,7 @@ function purchaseItem(itemName, itemCost) {
   );
 
   if (item && player.gold >= itemCost) {
-    // Deduct gold and apply item effect
+    // make player broke
     player.gold -= itemCost;
     item.effect(player);
 
@@ -233,13 +232,14 @@ function startCombat() {
   }
 }
 
+
 function combatRound(enemyKey) {
   const enemy = enemies[enemyKey];
 
   player.health -= enemy.damage;
   enemy.health -= player.damage;
 
-  updateFightStatus(player.damage, enemy.name, enemy.damage, enemy); // Pass enemy object here
+  updateFightStatus(player.damage, enemy.name, enemy.damage, enemy);
   updatePlayerStatus();
 
   if (isCombatOver(player, enemy)) {
@@ -305,7 +305,6 @@ function displayHealingStatus(healingAmount) {
   ).innerText = `Healed for ${healingAmount} health.`;
 }
 
-// Leveling up and XP
 function givePlayerXp(xpVal) {
   player.xp += xpVal;
 

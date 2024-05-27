@@ -1,25 +1,23 @@
-/* Base Colors */
+
 :root {
-  --primary-color: #ff6ec7; /* Neon pink */
-  --secondary-color: #00f6ff; /* Neon cyan */
-  --accent-color: #fffb00; /* Bright yellow */
-  --background-color: #1d1d1d; /* Dark background */
-  --text-color: #e0e0e0; /* Light text */
-  --card-background: #282828; /* Dark gray for cards */
+  --primary-color: #ff6ec7;
+  --secondary-color: #00f6ff;
+  --accent-color: #fffb00;
+  --background-color: #1d1d1d;
+  --text-color: #e0e0e0
+  --card-background: #282828;
 }
 
-/* General Styles */
 body {
   background-color: var(--background-color);
   color: var(--text-color);
-  font-family: 'Orbitron', sans-serif; /* Synthwave-inspired font */
+  font-family: 'Orbitron', sans-serif;
   margin: 0;
   padding: 0;
-  background-image: url('/Images/Synth.jpg'); /* Synthwave background image */
+  background-image: url('/Images/Synth.jpg');
   background-size: cover;
 }
 
-/* Main container */
 main {
   max-width: 800px;
   margin: 0 auto;
@@ -30,7 +28,6 @@ main {
   box-shadow: 0 0 10px var(--primary-color);
 }
 
-/* Header and Sections */
 header, section {
   margin-bottom: 20px;
   background-color: var(--card-background);
@@ -41,7 +38,6 @@ header, section {
   font-family: 'Orbitron', sans-serif;
 }
 
-/* Buttons */
 .button-39 {
   background-color: var(--primary-color);
   color: var(--background-color);
@@ -57,8 +53,8 @@ header, section {
 
 #cycleThemes {
   position: fixed;
-  top: 10px;  /* Adjust as needed */
-  right: 10px;  /* Adjust as needed */
+  top: 10px;
+  right: 10px;
   background-color: var(--primary-color);
   color: var(--white-color);
   border: 2px solid var(--secondary-color);
@@ -69,7 +65,7 @@ header, section {
   text-transform: uppercase;
   transition: background-color 0.3s, border-color 0.3s;
   font-family: 'Orbitron', sans-serif;
-  z-index: 1000;  /* Ensure it stays above other elements */
+  z-index: 1000;
 }
 
 #cycleThemes:hover {
@@ -103,7 +99,6 @@ select.button-39:hover {
   box-shadow: 0 0 10px var(--primary-color);
 }
 
-/* Status Paragraphs */
 #PlayerStat, #FightStatus, #ActivityStatus {
   padding: 20px;
   background-color: var(--card-background);
@@ -115,7 +110,6 @@ select.button-39:hover {
   font-family: 'Orbitron', sans-serif;
 }
 
-/* Focused select and button styling */
 select.button-39:focus,
 button.button-39:focus {
   outline: none;
@@ -124,7 +118,6 @@ button.button-39:focus {
   font-family: 'Orbitron', sans-serif;
 }
 
-/* Styling for the enemies selection section */
 .enemies-selection {
   background-color: var(--card-background);
   border: 2px solid var(--primary-color);
@@ -135,7 +128,6 @@ button.button-39:focus {
   font-family: 'Orbitron', sans-serif;
 }
 
-/* Style for the development side panel */
 #dev-panel {
   position: fixed;
   font-family: 'Orbitron', sans-serif;
@@ -150,7 +142,6 @@ button.button-39:focus {
   border-radius: 10px 0 0 10px;
 }
 
-/* Styling buttons within the dev panel */
 #dev-panel button {
   width: 100%;
   font-family: 'Orbitron', sans-serif;
@@ -170,7 +161,6 @@ button.button-39:focus {
   box-shadow: 0 0 10px var(--accent-color);
 }
 
-/* Shop section */
 .shop {
   font-family: 'Orbitron', sans-serif;
   margin-top: 15px;
@@ -180,7 +170,6 @@ button.button-39:focus {
   box-shadow: 0 0 10px var(--primary-color);
 }
 
-/* Shop heading */
 .shop h3 {
   font-family: 'Orbitron', sans-serif;
   margin-bottom: 10px;
@@ -190,7 +179,6 @@ button.button-39:focus {
   text-shadow: 0 0 5px var(--secondary-color);
 }
 
-/* Shop item list */
 .shop #shop-items {
   list-style: none;
   margin-bottom: 20px;
@@ -202,7 +190,6 @@ button.button-39:focus {
   font-weight: bold;
 }
 
-/* Shop item */
 .shop #shop-items li {
   margin-bottom: 10px;
   padding: 20px;
@@ -215,7 +202,6 @@ button.button-39:focus {
   box-shadow: 0 0 10px var(--primary-color);
 }
 
-/* Buy button */
 .shop #shop-items .buy-button {
   padding: 10px 20px;
   border: 2px solid var(--secondary-color);

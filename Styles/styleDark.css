@@ -1,22 +1,20 @@
-/* Base Colors */
+
 :root {
-  --primary-color: #39a8db; /* Turquoise */
-  --secondary-color: #00cccc; /* Cyan */
-  --white-color: #ffffff; /* White */
-  --light-background: #e0f0f7; /* Light Blue */
-  --dark-gray: #333333; /* Dark Gray */
+  --primary-color: #39a8db;
+  --secondary-color: #00cccc;
+  --white-color: #ffffff;
+  --light-background: #e0f0f7;
+  --dark-gray: #333333;
 }
 
-/* General Styles */
 body {
   background-color: var(--light-background);
   color: var(--dark-gray);
-  font-family: 'Arial', sans-serif; /* Set the font to Arial */
+  font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
 }
 
-/* Main container */
 main {
   max-width: 800px;
   margin: 0 auto;
@@ -25,7 +23,6 @@ main {
   background-color: var(--white-color);
 }
 
-/* Header and Sections */
 header, section {
   margin-bottom: 20px;
   background-color: var(--white-color);
@@ -33,7 +30,6 @@ header, section {
   padding: 10px;
 }
 
-/* Buttons */
 .button-39 {
   background-color: var(--primary-color);
   color: var(--white-color);
@@ -50,7 +46,6 @@ header, section {
   background-color: var(--secondary-color);
 }
 
-/* Select Dropdown */
 select.button-39 {
   background-color: var(--white-color);
   color: var(--dark-gray);
@@ -67,7 +62,6 @@ select.button-39:hover {
   border-color: var(--secondary-color);
 }
 
-/* Status Paragraphs */
 #PlayerStat, #FightStatus, #ActivityStatus {
   padding: 10px;
   background-color: var(--white-color);
@@ -77,14 +71,12 @@ select.button-39:hover {
   font-family: 'Arial', sans-serif;
 }
 
-/* Focused select and button styling */
 select.button-39:focus,
 button.button-39:focus {
   outline: none;
   border-color: var(--secondary-color);
 }
 
-/* Styling for the enemies selection section */
 .enemies-selection {
   background-color: var(--white-color);
   border: 2px solid var(--primary-color);
@@ -93,7 +85,6 @@ button.button-39:focus {
   font-family: 'Arial', sans-serif;
 }
 
-/* Position the button in the top right corner */
 #cycleThemes {
   position: fixed;
   top: 10px;
@@ -114,7 +105,6 @@ button.button-39:focus {
   background-color: var(--secondary-color);
 }
 
-/* Style for the development side panel */
 #dev-panel {
   position: fixed;
   font-family: 'Arial', sans-serif;
@@ -129,7 +119,6 @@ button.button-39:focus {
   border-radius: 0 0 0 10px;
 }
 
-/* Styling buttons within the dev panel */
 #dev-panel button {
   width: 100%;
   font-family: 'Arial', sans-serif;
@@ -147,7 +136,6 @@ button.button-39:focus {
   background-color: var(--secondary-color);
 }
 
-/* Shop section */
 .shop {
   font-family: 'Arial', sans-serif;
   margin-top: 15px;
@@ -156,7 +144,6 @@ button.button-39:focus {
   color: var(--dark-gray);
 }
 
-/* Shop heading */
 .shop h3 {
   margin-bottom: 10px;
   font-size: 1.2rem;
@@ -164,7 +151,6 @@ button.button-39:focus {
   font-weight: bold;
 }
 
-/* Shop item list */
 .shop #shop-items {
   list-style: none;
   margin-bottom: 20px;
@@ -176,7 +162,6 @@ button.button-39:focus {
   font-weight: bold;
 }
 
-/* Shop item */
 .shop #shop-items li {
   margin-bottom: 5px;
   padding: 10px;
@@ -188,7 +173,6 @@ button.button-39:focus {
   align-items: center;
 }
 
-/* Buy button */
 .shop #shop-items .buy-button {
   padding: 5px 10px;
   border: 2px solid var(--secondary-color);
