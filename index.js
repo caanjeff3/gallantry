@@ -380,7 +380,6 @@ function changeStylesheet() {
   // Array of stylesheets to cycle through
   const stylesheets = [
     "Styles/styleCream.css",
-    "Styles/styleSynth.css",
     "Styles/styleDark.css",
   ];
 
