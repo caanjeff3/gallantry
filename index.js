@@ -96,7 +96,6 @@ const enemies = {
     baseGold: 100,
     xpVal: 100,
   },
-  //End of Forest (0-10)
 
   //Start of Mountain Pass (10-25)
   mountainBandit: {
@@ -122,6 +121,56 @@ const enemies = {
     damage: 55,
     baseGold: 95,
     xpVal: 95,
+  },
+  snowYeti: {
+    name: "Snow Yeti",
+    maxHealth: 200,
+    health: 200,
+    damage: 35,
+    baseGold: 50,
+    xpVal: 50,
+  },
+  frozenDragon: {
+    name: "Frozen Dragon",
+    maxHealth: 1000,
+    health: 1000,
+    damage: 50,
+    baseGold: 500,
+    xpVal: 500,
+  },
+  
+  //Start of Volcano (25-50)
+  lavaElemental: {
+    name: "Lava Elemental",
+    maxHealth: 300,
+    health: 300,
+    damage: 40,
+    baseGold: 60,
+    xpVal: 60,
+  },
+  fireSalamander: {
+    name: "Fire Salamander",
+    maxHealth: 350,
+    health: 350,
+    damage: 45,
+    baseGold: 70,
+    xpVal: 70,
+  },
+  magmaGolem: {
+    name: "Magma Golem",
+    maxHealth: 400,
+    health: 400,
+    damage: 50,
+    baseGold: 80,
+    xpVal: 80,
+  },
+  volcanicDragon: {
+    name: "Volcanic Dragon",
+    maxHealth: 2000,
+    health: 2000,
+    damage: 70,
+    baseGold: 1000,
+    xpVal: 1000,
   },
 };
 
@@ -160,9 +209,10 @@ function loadPlayerStatsFromCookies() {
 
   if (playerStatsCookie) {
     const playerStats = playerStatsCookie.split("=")[1];
-    const [health, gold, level, xp, xpReq] = playerStats.split("|").map(Number);
+    const [maxHealth,health, gold, level, xp, xpReq] = playerStats.split("|").map(Number);
 
     // Update player object
+    player.maxHealth = maxHealth;
     player.health = health;
     player.gold = gold;
     player.level = level;
@@ -215,7 +265,7 @@ function savePlayerStatsToCookies(player) {
   const expirationDate = new Date();
   expirationDate.setTime(expirationDate.getTime() + 30 * 24 * 60 * 60 * 1000); // 30 days
 
-  const playerStats = `${player.health}|${player.gold}|${player.level}|${player.xp}|${player.xpReq}`;
+  const playerStats = `${player.maxHealth}|${player.health}|${player.gold}|${player.level}|${player.xp}|${player.xpReq}`;
   document.cookie = `playerStats=${playerStats}; expires=${expirationDate.toUTCString()}; path=/`;
 }
 
@@ -310,14 +360,34 @@ function givePlayerXp(xpVal) {
 
   while (player.xp >= player.xpReq) {
     player.xp -= player.xpReq;
-    player.xpReq = Math.round(player.xpReq * 1.05);
+    player.xpReq = Math.round(player.xpReq * 1.05 + (player.level * 5));
     levelUpPlayer();
   }
 }
+function LevelViaXp(targetLevel) {
+  // Ensure targetLevel is higher than the current level
+  if (targetLevel <= player.level) {
+    console.log("Target level must be greater than the current level.");
+    return;
+  }
+
+  // Calculate the XP needed for each level-up and apply it until the target level is reached
+  while (player.level < targetLevel) {
+    let xpNeededForNextLevel = player.xpReq - player.xp;  // XP required to reach the next level
+    if (player.xp + xpNeededForNextLevel >= player.xpReq) {
+      player.xp += xpNeededForNextLevel;
+      player.xpReq = Math.round(player.xpReq * 1.05 + (player.level * 5));  // Calculate new XP requirement for the next level
+      levelUpPlayer();  // Function to level up the player
+    }
+  }
+}
+
 
 function levelUpPlayer() {
-  player.maxHealth += Math.round(player.maxHealth * 0.1);
-  player.damage += Math.round(player.damage * 0.2);
+  let decayFactor = Math.pow(0.95, player.level)
+  player.maxHealth += Math.round(player.maxHealth * (0.125 * decayFactor));;
+  player.damage += Math.round(player.damage * (0.2 * decayFactor));
+
 
   if (player.health > player.maxHealth) {
     player.health = player.maxHealth;
