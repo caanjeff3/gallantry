@@ -172,6 +172,57 @@ const enemies = {
     baseGold: 1000,
     xpVal: 1000,
   },
+
+  crystalWolf: {
+    "name": "Crystal Wolf",
+    "maxHealth": 150,
+    "health": 150,
+    "damage": 40,
+    "baseGold": 50,
+    "xpVal": 50
+  },
+  glimmeringDryad: {
+    "name": "Glimmering Dryad",
+    "maxHealth": 180,
+    "health": 180,
+    "damage": 45,
+    "baseGold": 55,
+    "xpVal": 55
+  },
+  crystalGolem: {
+    "name": "Crystal Golem",
+    "maxHealth": 300,
+    "health": 300,
+    "damage": 60,
+    "baseGold": 70,
+    "xpVal": 70
+  },
+  shimmeringUnicorn: {
+    "name": "Shimmering Unicorn",
+    "maxHealth": 450,
+    "health": 450,
+    "damage": 80,
+    "baseGold": 100,
+    "xpVal": 100
+  },
+  luminousElemental: {
+    "name": "Luminous Elemental",
+    "maxHealth": 600,
+    "health": 600,
+    "damage": 90,
+    "baseGold": 120,
+    "xpVal": 120
+  },
+  celestialPhoenix: {
+    "name": "(Boss) Celestial Phoenix",
+    "maxHealth": 3000,
+    "health": 3000,
+    "damage": 150,
+    "baseGold": 500,
+    "xpVal": 1500
+  }
+
+
 };
 
 // me when i listen for events
