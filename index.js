@@ -2,6 +2,7 @@
 const COMBAT_INTERVAL_MS = 1000;
 const HEALTH_REGEN_INTERVAL_MS = 1000; // 1 second
 
+
 // Player state variables
 let combatInterval = null;
 let potions = 1;
@@ -56,173 +57,29 @@ const player = {
 
 const enemies = {
   //Start of Forest (0-10)
-  rat: {
-    name: "Rat",
-    maxHealth: 25,
-    health: 25,
-    damage: 10,
-    baseGold: 5,
-    xpVal: 5,
-  },
-  wildBoar: {
-    name: "Wild Boar",
-    maxHealth: 30,
-    health: 30,
-    damage: 12,
-    baseGold: 7,
-    xpVal: 7,
-  },
-  ent: {
-    name: "Ent",
-    maxHealth: 60,
-    health: 60,
-    damage: 18,
-    baseGold: 15,
-    xpVal: 15,
-  },
-  direWolf: {
-    name: "Dire Wolf",
-    maxHealth: 75,
-    health: 75,
-    damage: 20,
-    baseGold: 20,
-    xpVal: 20,
-  },
-  ancientGuardian: {
-    name: "Ancient Guardian",
-    maxHealth: 500,
-    health: 500,
-    damage: 30,
-    baseGold: 100,
-    xpVal: 100,
-  },
-
-  //Start of Mountain Pass (10-25)
-  mountainBandit: {
-    name: "Mountain Bandit",
-    maxHealth: 100,
-    health: 100,
-    damage: 25,
-    baseGold: 30,
-    xpVal: 30,
-  },
-  frostSpider: {
-    name: "Frost Spider",
-    maxHealth: 200,
-    health: 200,
-    damage: 35,
-    baseGold: 45,
-    xpVal: 45,
-  },
-  iceTroll: {
-    name: "Ice Troll",
-    maxHealth: 444,
-    health: 444,
-    damage: 55,
-    baseGold: 95,
-    xpVal: 95,
-  },
-  snowYeti: {
-    name: "Snow Yeti",
-    maxHealth: 200,
-    health: 200,
-    damage: 35,
-    baseGold: 50,
-    xpVal: 50,
-  },
-  frozenDragon: {
-    name: "Frozen Dragon",
-    maxHealth: 1000,
-    health: 1000,
-    damage: 50,
-    baseGold: 500,
-    xpVal: 500,
-  },
+  rat: { name: "Rat", maxHealth: 25, health: 25, damage: 10, baseGold: 5, xpVal: 5 },
+  wildBoar: { name: "Wild Boar", maxHealth: 30, health: 30, damage: 12, baseGold: 7, xpVal: 7 },
+  ent: { name: "Ent", maxHealth: 60, health: 60, damage: 18, baseGold: 15, xpVal: 15 },
+  direWolf: { name: "Dire Wolf", maxHealth: 75, health: 75, damage: 20, baseGold: 20, xpVal: 20 },
+  ancientGuardian: { name: "Ancient Guardian", maxHealth: 500, health: 500, damage: 30, baseGold: 100, xpVal: 100 },
   
-  //Start of Volcano (25-50)
-  lavaElemental: {
-    name: "Lava Elemental",
-    maxHealth: 300,
-    health: 300,
-    damage: 40,
-    baseGold: 60,
-    xpVal: 60,
-  },
-  fireSalamander: {
-    name: "Fire Salamander",
-    maxHealth: 350,
-    health: 350,
-    damage: 45,
-    baseGold: 70,
-    xpVal: 70,
-  },
-  magmaGolem: {
-    name: "Magma Golem",
-    maxHealth: 400,
-    health: 400,
-    damage: 50,
-    baseGold: 80,
-    xpVal: 80,
-  },
-  volcanicDragon: {
-    name: "Volcanic Dragon",
-    maxHealth: 2000,
-    health: 2000,
-    damage: 70,
-    baseGold: 1000,
-    xpVal: 1000,
-  },
+  mountainBandit: { name: "Mountain Bandit", maxHealth: 100, health: 100, damage: 25, baseGold: 30, xpVal: 30 },
+  frostSpider: { name: "Frost Spider", maxHealth: 200, health: 200, damage: 35, baseGold: 45, xpVal: 45 },
+  iceTroll: { name: "Ice Troll", maxHealth: 444, health: 444, damage: 55, baseGold: 95, xpVal: 95 },
+  snowYeti: { name: "Snow Yeti", maxHealth: 200, health: 200, damage: 35, baseGold: 50, xpVal: 50 },
+  frozenDragon: { name: "Frozen Dragon", maxHealth: 1000, health: 1000, damage: 50, baseGold: 500, xpVal: 500 },
+  
+  lavaElemental: { name: "Lava Elemental", maxHealth: 300, health: 300, damage: 40, baseGold: 60, xpVal: 60 },
+  fireSalamander: { name: "Fire Salamander", maxHealth: 350, health: 350, damage: 45, baseGold: 70, xpVal: 70 },
+  magmaGolem: { name: "Magma Golem", maxHealth: 400, health: 400, damage: 50, baseGold: 80, xpVal: 80 },
+  volcanicDragon: { name: "Volcanic Dragon", maxHealth: 2000, health: 2000, damage: 70, baseGold: 1000, xpVal: 1000 },
 
-  crystalWolf: {
-    name: "Crystal Wolf",
-    maxHealth: 150,
-    health: 150,
-    damage: 40,
-    baseGold: 50,
-    xpVal: 50
-  },
-  glimmeringDryad: {
-    name: "Glimmering Dryad",
-    maxHealth: 180,
-    health: 180,
-    damage: 45,
-    baseGold: 55,
-    xpVal: 55
-  },
-  crystalGolem: {
-    name: "Crystal Golem",
-    maxHealth: 300,
-    health: 300,
-    damage: 60,
-    baseGold: 70,
-    xpVal: 70
-  },
-  shimmeringUnicorn: {
-    name: "Shimmering Unicorn",
-    maxHealth: 450,
-    health: 450,
-    damage: 80,
-    baseGold: 100,
-    xpVal: 100
-  },
-  luminousElemental: {
-    name: "Luminous Elemental",
-    maxHealth: 600,
-    health: 600,
-    damage: 90,
-    baseGold: 120,
-    xpVal: 120
-  },
-  celestialPhoenix: {
-    name: "Celestial Phoenix",
-    maxHealth: 3000,
-    health: 3000,
-    damage: 150,
-    baseGold: 500,
-    xpVal: 1500
-  }
-
-
+  crystalWolf: { name: "Crystal Wolf", maxHealth: 150, health: 150, damage: 40, baseGold: 50, xpVal: 50 },
+  glimmeringDryad: { name: "Glimmering Dryad", maxHealth: 180, health: 180, damage: 45, baseGold: 55, xpVal: 55 },
+  crystalGolem: { name: "Crystal Golem", maxHealth: 300, health: 300, damage: 60, baseGold: 70, xpVal: 70 },
+  shimmeringUnicorn: { name: "Shimmering Unicorn", maxHealth: 450, health: 450, damage: 80, baseGold: 100, xpVal: 100 },
+  luminousElemental: { name: "Luminous Elemental", maxHealth: 600, health: 600, damage: 90, baseGold: 120, xpVal: 120 },
+  celestialPhoenix: { name: "Celestial Phoenix", maxHealth: 3000, health: 3000, damage: 150, baseGold: 500, xpVal: 1500 }
 };
 
 // me when i listen for events
@@ -244,6 +101,7 @@ function initializeGame() {
   // Set up intervals
   setInterval(updateTipLine, 20000); // Update tip line every 20 seconds
   setInterval(regeneratePlayerHealth, HEALTH_REGEN_INTERVAL_MS); // Regenerate health every 1 second
+  filterEnemiesByLevel(player.level);
 
   // Load player stats from cookies
   loadPlayerStatsFromCookies();
@@ -260,7 +118,9 @@ function loadPlayerStatsFromCookies() {
 
   if (playerStatsCookie) {
     const playerStats = playerStatsCookie.split("=")[1];
-    const [maxHealth,health, gold, level, xp, xpReq] = playerStats.split("|").map(Number);
+    const [maxHealth, health, gold, level, xp, xpReq] = playerStats
+      .split("|")
+      .map(Number);
 
     // Update player object
     player.maxHealth = maxHealth;
@@ -271,6 +131,7 @@ function loadPlayerStatsFromCookies() {
     player.xpReq = xpReq;
 
     updatePlayerStatus();
+    filterEnemiesByLevel(player.level);
   }
 }
 
@@ -332,7 +193,6 @@ function startCombat() {
     console.log("Currently in a fight!");
   }
 }
-
 
 function combatRound(enemyKey) {
   const enemy = enemies[enemyKey];
@@ -411,7 +271,7 @@ function givePlayerXp(xpVal) {
 
   while (player.xp >= player.xpReq) {
     player.xp -= player.xpReq;
-    player.xpReq = Math.round(player.xpReq * 1.05 + (player.level * 5));
+    player.xpReq = Math.round(player.xpReq * 1.05 + player.level * 5);
     levelUpPlayer();
   }
 }
@@ -424,21 +284,20 @@ function LevelViaXp(targetLevel) {
 
   // Calculate the XP needed for each level-up and apply it until the target level is reached
   while (player.level < targetLevel) {
-    let xpNeededForNextLevel = player.xpReq - player.xp;  // XP required to reach the next level
+    let xpNeededForNextLevel = player.xpReq - player.xp; // XP required to reach the next level
     if (player.xp + xpNeededForNextLevel >= player.xpReq) {
       player.xp += xpNeededForNextLevel;
-      player.xpReq = Math.round(player.xpReq * 1.05 + (player.level * 5));  // Calculate new XP requirement for the next level
-      levelUpPlayer();  // Function to level up the player
+      player.xpReq = Math.round(player.xpReq * 1.05 + player.level * 5); // Calculate new XP requirement for the next level
+      levelUpPlayer(); // Function to level up the player
     }
   }
 }
 
-
 function levelUpPlayer() {
-  let decayFactor = Math.pow(0.95, player.level)
-  player.maxHealth += Math.round(player.maxHealth * (0.125 * decayFactor));;
+  let decayFactor = Math.pow(0.95, player.level);
+  player.maxHealth += Math.round(player.maxHealth * (0.125 * decayFactor));
   player.damage += Math.round(player.damage * (0.2 * decayFactor));
-
+  filterEnemiesByLevel(player.level);
 
   if (player.health > player.maxHealth) {
     player.health = player.maxHealth;
@@ -486,6 +345,13 @@ function showDevConsole() {
   }
 }
 
+document.addEventListener('keydown', function(event) {
+  // Check if the pressed key is "H" (key code 72)
+  if (event.key === 'h' || event.key === 'H') {
+      showDevConsole();
+  }
+});
+
 function hideDevConsole() {
   const devPanel = document.getElementById("dev-panel");
 
@@ -499,10 +365,7 @@ function changeStylesheet() {
   const stylesheetLink = document.getElementById("stylesheet");
 
   // Array of stylesheets to cycle through
-  const stylesheets = [
-    "Styles/styleCream.css",
-    "Styles/styleDark.css",
-  ];
+  const stylesheets = ["Styles/styleCream.css", "Styles/styleXP.css"];
 
   // Get the current href attribute (current stylesheet)
   const currentStylesheet = stylesheetLink.getAttribute("href");
@@ -546,4 +409,21 @@ function resetPlayerHealth() {
 function addGold() {
   player.gold += 100;
   updatePlayerStatus();
+}
+
+function filterEnemiesByLevel(level) {
+  // Get all optgroup elements
+  const optGroups = document.querySelectorAll('optgroup');
+
+  optGroups.forEach(optGroup => {
+      // Get the minimum level required for each optgroup
+      const minLevel = parseInt(optGroup.getAttribute('data-min-level'));
+
+      // If the player's level is less than the required minimum level, hide the optgroup
+      if (level <= minLevel) {
+          optGroup.style.display = 'none';
+      } else {
+          optGroup.style.display = 'block';
+      }
+  });
 }
