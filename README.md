@@ -1,7 +1,7 @@
 # Valor's Reign
 Version 0.12.2
 
-Welcome to **Valor's Reign** - a single-player, HTML-based, medieval-themed idler/RPG game currently in beta. Embark on an epic journey through a fantastical medieval world, where you will complete quests, gather resources, and grow your character from a humble peasant to a mighty hero.
+Welcome to **Gallantry** - a single-player, HTML-based, medieval-themed idler/RPG game currently in beta. Embark on an epic journey through a fantastical medieval world, where you will complete quests, gather resources, and grow your character from a humble peasant to a mighty hero.
 
 ## Table of Contents
 
